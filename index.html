@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Diggibyte at Data Innovation Summit MEA 2026</title>
+  <meta name="description" content="Spin the dial to pick a summit stage and see what Diggibyte and Databricks build for it. Data Innovation Summit MEA, 14–15 October 2026, JW Marriott Hotel Marina, Dubai.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%AD%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="backdrop" aria-hidden="true">
+    <span class="glow glow-a"></span>
+    <span class="glow glow-b"></span>
+    <span class="glow glow-c"></span>
+    <span class="grid"></span>
+  </div>
+
+  <a class="skip" href="#stage">Skip to the industry details</a>
+
+  <header class="topbar">
+    <div class="brands">
+      <img src="assets/img/diggibyte-logo.png" alt="Diggibyte" class="logo logo-diggibyte">
+      <span class="brand-divider" aria-hidden="true"></span>
+      <img src="assets/img/databricks-logo.png" alt="Databricks" class="logo logo-databricks">
+    </div>
+    <img src="assets/img/dis-logo.svg" alt="Data Innovation Summit MEA 2026" class="logo logo-dis">
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <p class="hero-when"><span data-event="dates"></span><br><span data-event="venue"></span></p>
+        <h1 id="hero-title">Six industries. One platform. Spin to see yours.</h1>
+        <p class="lede">Energy, retail, manufacturing, infrastructure, tourism and healthcare. Spin the dial or pick your industry, and we'll show you what we build for it on Databricks, with a demo you can open right away.</p>
+
+        <div class="countdown" aria-live="polite">
+          <p class="countdown-label" id="countdown-label">Doors open in</p>
+          <dl class="countdown-units">
+            <div><dd data-unit="d">00</dd><dt>days</dt></div>
+            <div><dd data-unit="h">00</dd><dt>hours</dt></div>
+            <div><dd data-unit="m">00</dd><dt>min</dt></div>
+            <div><dd data-unit="s">00</dd><dt>sec</dt></div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="dial-wrap">
+        <div class="dial" id="dial">
+          <div class="ring" aria-hidden="true"></div>
+          <div class="ring-highlight" id="ring-highlight" aria-hidden="true"></div>
+          <div class="needle" id="needle" aria-hidden="true"><span></span></div>
+          <div class="stage-buttons" id="stage-buttons" role="group" aria-label="Choose an industry"></div>
+          <button class="hub" id="spin" type="button">
+            <span class="hub-main">Spin</span>
+            <span class="hub-sub">or press Space</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="stage" id="stage" tabindex="-1" aria-live="polite">
+      <div class="stage-intro">
+        <img src="" alt="" class="stage-icon" id="stage-icon">
+        <div>
+          <h2 id="stage-name"></h2>
+          <p class="stage-tag" id="stage-tag"></p>
+          <p class="stage-audience" id="stage-audience"></p>
+          <p class="stage-focus" id="stage-focus"></p>
+        </div>
+      </div>
+
+      <div class="stage-body">
+        <article class="offer">
+          <p class="kicker">What Diggibyte builds here</p>
+          <h3 id="offer-title"></h3>
+          <p id="offer-text"></p>
+          <ul class="tech" id="offer-tech" aria-label="Databricks technology"></ul>
+        </article>
+
+        <article class="usecase">
+          <p class="kicker" id="usecase-who"></p>
+          <p class="usecase-problem" id="usecase-problem"></p>
+          <p class="usecase-outcome" id="usecase-outcome"></p>
+          <p class="usecase-metric" id="usecase-metric"></p>
+        </article>
+
+        <div class="demo">
+          <div class="demo-head">
+            <h3>Try it at the booth</h3>
+            <a class="demo-link" id="demo-link" href="#" target="_blank" rel="noopener">Open the demo</a>
+          </div>
+          <ol id="demo-steps"></ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" aria-labelledby="about-title">
+      <div class="about-copy">
+        <h2 id="about-title">Who you'll meet at our booth</h2>
+        <p id="diggibyte-summary"></p>
+        <a class="link" id="diggibyte-link" href="#">Visit diggibyte.com</a>
+      </div>
+      <dl class="proof" id="diggibyte-proof"></dl>
+    </section>
+
+    <section class="summit" aria-labelledby="summit-title">
+      <h2 id="summit-title">About the summit</h2>
+      <dl class="facts" id="facts"></dl>
+      <p class="summit-note">Organised by <span data-event="organiser"></span>. Build your agenda in <span data-event="app"></span>, the official event app, or see the <a id="schedule-link" href="#">full schedule</a>.</p>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p>Find Diggibyte in the exhibition area at <a id="event-link" href="#"><span data-event="name"></span></a>.</p>
+    <p class="fine">The companies and figures in the industry use cases are illustrative.</p>
+  </footer>
+
+  <script src="js/storylines.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
