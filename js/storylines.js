@@ -67,15 +67,16 @@ window.DIS = (function () {
   /*
    * The six industries on the dial, clockwise from the top.
    * url: where the "Open the demo" button goes for that industry.
-   *      TODO: fill in the six URLs. While a url is empty, the button shows "Demo link coming soon".
+   *      While a url is empty, the button shows "Demo link coming soon" and the dial label has no link icon.
+   *      TODO: Infrastructure, Tourism and Healthcare URLs.
    */
   const STAGES = [
     {
       id: "energy",
-      short: "Energy",
-      name: "Energy",
+      short: "Energy & Utility",
+      name: "Energy & Utility",
       icon: "assets/icons/energy.svg",
-      url: "", // TODO: Energy demo URL
+      url: "https://dbgen-npl-rp-7405609077320494.14.azure.databricksapps.com",
       stage: "agentic-ai",
       audience: "utilities, oil and gas, and renewables operators",
       focus: "Grids, plants and solar fleets send sensor data every few seconds. The value is in spotting faults early and planning maintenance before something breaks.",
@@ -101,7 +102,7 @@ window.DIS = (function () {
       short: "Retail",
       name: "Retail",
       icon: "assets/icons/retail.svg",
-      url: "", // TODO: Retail demo URL
+      url: "https://promo-pulse-7488500312027058.18.azure.databricksapps.com",
       stage: "analytics",
       audience: "retail groups, e-commerce and FMCG brands",
       focus: "Demand swings sharply around Ramadan, Eid, summer and big sale events. Stores and planners need answers this week, not in next month's report.",
@@ -127,7 +128,7 @@ window.DIS = (function () {
       short: "Manufacturing",
       name: "Manufacturing",
       icon: "assets/icons/manufacturing.svg",
-      url: "", // TODO: Manufacturing demo URL
+      url: "https://supplier-scar-app-7488500312027058.18.azure.databricksapps.com",
       stage: "agentic-ai",
       audience: "plant managers, operations and quality teams",
       focus: "Production lines generate machine, quality and energy data that rarely meets in one place. Scrap, downtime and energy cost hide in the gaps.",
@@ -228,5 +229,38 @@ window.DIS = (function () {
     }
   ];
 
-  return { EVENT, FACTS, DIGGIBYTE, TECH, SUMMIT_STAGES, STAGES };
+  // Diggibyte accelerators, from each project's own documentation.
+  const ACCELERATORS = [
+    {
+      name: "Databricks In-a-Box",
+      tag: "Databricks Brickbuilder Accelerator",
+      text: "Automates the deployment of standardised, scalable and configurable Databricks workspaces across dev, test and prod, so teams start on an enterprise-ready platform from day one.",
+      highlights: ["Faster time to value", "Simpler operations", "Cost optimisation at scale"],
+      links: [
+        { label: "View on Databricks", url: "https://www.databricks.com/company/partners/consulting-and-si/partner-solutions/diggibyte-databricks-in-a-box" },
+        { label: "Learn more", url: "https://diggibyte.com/Databricks-in-a-box/" }
+      ]
+    },
+    {
+      name: "DataLab",
+      tag: "Config-driven medallion lakehouse",
+      text: "A reusable bronze-to-gold framework on Lakeflow Spark Declarative Pipelines. Every table is one YAML file, validated and generated into a pipeline, with DQX data-quality checks end to end.",
+      highlights: ["Bad rows quarantined, never dropped", "No hardcoded catalogs: dev to prod without config edits", "Authored by people or coding agents"],
+      links: [
+        { label: "Framework", url: "https://github.com/dediggibyte/datalab-framework" },
+        { label: "Reference implementation", url: "https://github.com/dediggibyte/datalab" }
+      ]
+    },
+    {
+      name: "DiggiOntos",
+      tag: "Business catalog hub for Databricks",
+      text: "One Databricks App on Lakebase that registers many workspaces across regions. Teams add descriptions, owners, domains and glossary terms, published back to Unity Catalog, which stays the system of record.",
+      highlights: ["Discover assets across every workspace", "Daily harvest flags conflicting edits", "Ask the catalog, powered by Genie"],
+      links: [
+        { label: "View on GitHub", url: "https://github.com/dediggibyte/ontos_business_catalog" }
+      ]
+    }
+  ];
+
+  return { EVENT, FACTS, DIGGIBYTE, TECH, SUMMIT_STAGES, STAGES, ACCELERATORS };
 })();

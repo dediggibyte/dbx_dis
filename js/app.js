@@ -5,7 +5,7 @@
 (function () {
   "use strict";
 
-  const { EVENT, FACTS, DIGGIBYTE, TECH, SUMMIT_STAGES, STAGES } = window.DIS;
+  const { EVENT, FACTS, DIGGIBYTE, TECH, SUMMIT_STAGES, STAGES, ACCELERATORS } = window.DIS;
   const N = STAGES.length;
   const SEG = 360 / N; // degrees per segment
   const LABEL_RADIUS = 60; // label distance from centre, % of dial size
@@ -35,6 +35,21 @@
   // Centre angle of segment i, clockwise from the top.
   function target(i) { return SEG * i + SEG / 2; }
 
+  const EXT_ICON =
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 4h6v6M20 4l-9 9M18 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V7a1 1 0 0 1 1-1h5"/></svg>';
+
+  function buildAccelerators() {
+    $("accelerators").innerHTML = ACCELERATORS.map((a) =>
+      '<article class="acc">' +
+      '<p class="acc-tag">' + esc(a.tag) + "</p>" +
+      "<h3>" + esc(a.name) + "</h3>" +
+      '<p class="acc-text">' + esc(a.text) + "</p>" +
+      '<ul class="acc-points">' + a.highlights.map((h) => "<li>" + esc(h) + "</li>").join("") + "</ul>" +
+      '<div class="acc-links">' + a.links.map((l) =>
+        '<a href="' + esc(l.url) + '" target="_blank" rel="noopener">' + esc(l.label) + EXT_ICON + "</a>").join("") +
+      "</div></article>").join("");
+  }
+
   /* ---------- Static content ---------- */
 
   function fillStatic() {
@@ -57,8 +72,16 @@
       const rad = (target(i) * Math.PI) / 180;
       const left = 50 + LABEL_RADIUS * Math.sin(rad);
       const top = 50 - LABEL_RADIUS * Math.cos(rad);
-      return '<button type="button" class="stage-btn" data-index="' + i + '" aria-pressed="false" ' +
-        'style="left:' + left.toFixed(2) + '%;top:' + top.toFixed(2) + '%">' + esc(s.short) + "</button>";
+      // An industry with a demo URL gets a hyperlinked name: clicking it opens the demo in a
+      // new tab and also selects the industry on the dial. Others get a plain select button.
+      const label = s.url
+        ? '<a class="stage-btn is-link" data-index="' + i + '" href="' + esc(s.url) + '" ' +
+          'target="_blank" rel="noopener" title="Open the ' + esc(s.short) + ' demo in a new tab">' +
+          '<span>' + esc(s.short) + "</span>" + EXT_ICON + "</a>"
+        : '<button type="button" class="stage-btn" data-index="' + i + '" aria-pressed="false">' +
+          esc(s.short) + "</button>";
+      return '<div class="stage-item" style="left:' + left.toFixed(2) + '%;top:' + top.toFixed(2) + '%">' +
+        label + "</div>";
     }).join("");
     buttonsEl.addEventListener("click", (e) => {
       const b = e.target.closest(".stage-btn");
@@ -127,7 +150,7 @@
     const link = $("demo-link");
     if (s.url) {
       link.href = s.url;
-      link.textContent = "Open the " + s.short.toLowerCase() + " demo";
+      link.innerHTML = "Open the " + esc(s.short) + " demo" + EXT_ICON;
       link.removeAttribute("aria-disabled");
       link.classList.remove("is-pending");
     } else {
@@ -139,8 +162,13 @@
 
     $("demo-steps").innerHTML = s.demo.map((d) => "<li>" + esc(d) + "</li>").join("");
 
-    buttonsEl.querySelectorAll(".stage-btn").forEach((b, n) =>
-      b.setAttribute("aria-pressed", n === i ? "true" : "false"));
+    buttonsEl.querySelectorAll(".stage-btn").forEach((b) => {
+      const on = Number(b.dataset.index) === i;
+      b.classList.toggle("is-active", on);
+      if (b.tagName === "BUTTON") b.setAttribute("aria-pressed", on ? "true" : "false");
+      else if (on) b.setAttribute("aria-current", "true");
+      else b.removeAttribute("aria-current");
+    });
 
     stageEl.classList.remove("is-revealing");
     if (animate) { void stageEl.offsetWidth; stageEl.classList.add("is-revealing"); }
@@ -195,6 +223,7 @@
 
   function init() {
     fillStatic();
+    buildAccelerators();
 
     spinBtn.addEventListener("click", () => { userAct(); spin(); });
 
